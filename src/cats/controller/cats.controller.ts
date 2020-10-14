@@ -8,18 +8,19 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { CatDto } from './dto/create-cat.dto';
+import { CatsService } from 'src/cats/service/cats.service';
+import { CatDto } from '../dto/create-cat.dto';
 
 @Controller('cats')
 export class CatsController {
+  constructor (private catsService:CatsService){};
   @Post()
   create(@Body() catDto: CatDto) {
-    return `This method creates a new cat with name ${catDto.name}`;
-  }
+this.catsService.create(catDto)  }
 
   @Get()
   findAll(@Query() query) {
-    return `This method lists all cats (limit: ${query.limit})`;
+this.catsService.findALL();
   }
 
   @Get(':id')
